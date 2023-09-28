@@ -41,7 +41,7 @@ File Transfer
 You have several options for transferring files to and from HPC:
    * You can employ the "scp" command for secure file copy.
    * The built-in file browser within JupyterLab allows you to upload or download files.
-   * Consider using "sshfs" to mount the HPC data folder onto your local system for easy access. In your local linux system:
+   * Consider using "sshfs" to mount the HPC data folder onto your local system for easy access. In your **local** linux system:
 
 .. code-block:: console
 
@@ -328,6 +328,7 @@ New conda environment based on Python3.10: mycondapy310
    ipython kernel install --user --name=mycondapy310
    pip install pyyaml scikit-image onnx onnx-simplifier
    pip install onnxruntime
+   pip install seaborn
 
 Test code:
 
