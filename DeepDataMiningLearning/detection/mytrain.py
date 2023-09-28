@@ -15,6 +15,10 @@ from DeepDataMiningLearning.detection.dataset import get_dataset #get_cocodatase
 from DeepDataMiningLearning.detection.models import create_detectionmodel #get_torchvision_detection_models, modify_fasterrcnnheader
 from DeepDataMiningLearning.detection.myevaluator import simplemodelevaluate, modelevaluate
 
+import numpy as np
+
+np.float = float
+np.int = int
 try:
     from torchinfo import summary
 except:
@@ -22,9 +26,10 @@ except:
 
 
 #Select the visible GPU
-os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3" #"0,1"
+# os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3" #"0,1"
 
-MACHINENAME='HPC'
+os.environ['CUDA_VISIBLE_DEVICES'] = ""
+MACHINENAME='Local'
 USE_AMP=True #AUTOMATIC MIXED PRECISION
 if MACHINENAME=='HPC':
     os.environ['TORCH_HOME'] = '/data/cmpe249-fa23/torchhome/'
@@ -54,7 +59,7 @@ def get_args_parser(add_help=True):
     )
     parser.add_argument("--model", default="customrcnn_resnet152", type=str, help="model name") #customrcnn_resnet152, fasterrcnn_resnet50_fpn_v2
     parser.add_argument("--trainable", default=0, type=int, help="how many sequence layers is trainable")
-    parser.add_argument("--device", default="cuda", type=str, help="device (Use cuda or cpu Default: cuda)")
+    parser.add_argument("--device", default="cpu", type=str, help="device (Use cuda or cpu Default: cuda)")
     parser.add_argument(
         "-b", "--batch-size", default=16, type=int, help="images per gpu, the total batch size is $NGPU x batch_size"
     )

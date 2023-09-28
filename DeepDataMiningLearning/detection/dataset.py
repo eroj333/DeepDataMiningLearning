@@ -13,6 +13,7 @@ from collections import defaultdict
 
 import torch
 import DeepDataMiningLearning.detection.transforms as reference_transforms
+from NuImagesDataLoader import NuImagesCoCoDataset
 
 
 WrapNewDict = False
@@ -151,6 +152,8 @@ def get_dataset(datasetname, is_train, is_val, args):
         ds, num_classes = get_kittidataset(is_train, is_val, args)
     elif datasetname.lower() == 'waymococo':
         ds, num_classes = get_waymococodataset(is_train, is_val, args)
+    elif datasetname.lower() == 'nuiamgescoco':
+        ds, num_classes = get_nuimages_dataset(is_train, is_val, args)
     return ds, num_classes
 
 def get_transform(is_train, args):
@@ -209,4 +212,11 @@ def get_waymococodataset(is_train, is_val, args):
     num_classes = dataset.numclass
     return dataset, num_classes
     #mykitti = datasets.Kitti(root=rootPath, train= True, transform = get_transform(is_train, args), target_transform = None, download = False)
+
+def get_nuimages_dataset(is_train, is_val, args):
+    dataset_root = args.data_path
+    version = f'v1.0-{"train" if is_train else "val"}'
+    transformfunc = get_transform(True, args)  # add augumentation
+    dataset = NuImagesCoCoDataset(dataset_root, version, transform=transformfunc)
+    return dataset, dataset.num_classes
 
