@@ -152,7 +152,7 @@ def get_dataset(datasetname, is_train, is_val, args):
         ds, num_classes = get_kittidataset(is_train, is_val, args)
     elif datasetname.lower() == 'waymococo':
         ds, num_classes = get_waymococodataset(is_train, is_val, args)
-    elif datasetname.lower() == 'nuiamgescoco':
+    elif datasetname.lower() == 'nuimagescoco':
         ds, num_classes = get_nuimages_dataset(is_train, is_val, args)
     return ds, num_classes
 

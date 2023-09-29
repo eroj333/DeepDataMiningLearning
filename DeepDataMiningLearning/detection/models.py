@@ -376,7 +376,7 @@ def create_detectionmodel(modelname, num_classes, trainable_layers):
     elif modelname.startswith('customrcnn'):
         x = modelname.split("_")
         if x[0]== 'customrcnn':
-            backbonename = x[1]
+            backbonename = "_".join(x[1:])
             model=CustomRCNN(backbone_modulename=backbonename,trainable_layers=trainable_layers,num_classes=num_classes,out_channels=256,min_size=800,max_size=1333)
     elif modelname.startswith('yolo'):
         model=create_yolomodel(modelname,num_classes)
